@@ -36,7 +36,7 @@ const packageManagers = {
 }
 
 async function installdependencies(projectPath: string, answer: Answers) {
-    const { language, validation, database, orm, logger, module, packageManager } = answer
+    const { language, validation, database, orm, logger, module, packageManager ,projectName} = answer
     const dependencies = ["express", "cors", "helmet", "dotenv"];
     const devdependencies = ["prettier", "eslint"];
 
@@ -61,20 +61,35 @@ async function installdependencies(projectPath: string, answer: Answers) {
         if (logger === "pino") devdependencies.push("pino-pretty");
     }
 
-    const spinner = ora('intalling dependencies').start();
+    const depSpinner = ora('Installing dependencies...').start();
 
     await execa(packageManager, [packageManagers[packageManager], ...dependencies], { cwd: projectPath });
 
-    spinner.succeed("intalled dependencies")
+    depSpinner.succeed('Dependencies installed');
 
-    spinner.text = 'intalling devdependencies';
-
+    const devSpinner = ora('Installing devDependencies...').start();
 
     await execa(packageManager, [packageManagers[packageManager], '-D', ...devdependencies], { cwd: projectPath });
 
-    spinner.succeed("intalled devDependencies");
+    devSpinner.succeed('DevDependencies installed');
 
-    spinner.stop()
+    lastlog(projectName,packageManager)
 
 };
+
+import chalk from 'chalk';
+const runCommand = (packageManager: "npm" | "pnpm" | "yarn") => packageManager === 'npm'
+    ? 'npm run dev'
+    : packageManager === 'yarn'
+        ? 'yarn dev'
+        : 'pnpm dev';
+
+const lastlog = (projectName:string,packageManager: "npm" | "pnpm" | "yarn") => {
+    console.log('\n' + chalk.green('✔ Project created successfully!') + '\n');
+    console.log(chalk.cyan('Next steps:'));
+    console.log('');
+    console.log(`  ${chalk.yellow('cd')} ${projectName}`);
+    console.log(`  ${chalk.yellow(runCommand(packageManager))}`);
+    console.log('');
+}
 

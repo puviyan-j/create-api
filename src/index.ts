@@ -17,5 +17,5 @@ export const run = async () => {
     if (answer.framework === "nest") {
         await copynestfolder(answer as nestProject )
     };
-    console.log(answer)
+   
 }
