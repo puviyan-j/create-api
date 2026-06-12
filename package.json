@@ -1,12 +1,15 @@
 {
-  "name": "create-api",
-  "version": "1.0.0",
+  "name": "create-api-starter-cli",
+  "version": "1.0.2",
   "description": "🚀 Create production-ready Express.js APIs in seconds.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
     "dev": "tsx bin/cli.ts "
+  },
+  "bin":{
+    "create-api":"./dist/bin/cli.js"
   },
   "repository": {
     "type": "git",

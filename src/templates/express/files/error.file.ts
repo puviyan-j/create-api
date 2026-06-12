@@ -1,12 +1,19 @@
 import type { Answers } from "inquirer";
 
-export function generateError(answer:Answers){
+export function generateError(answer: Answers) {
 
-    const {module,language,} = answer;
-    
-    
-    return `
-    function ErrorHandler(${language === 'typescript'?'err:any,_req:Request,res: Response,next:nextfunction':'err,req,res,next'}) {
+  const { module, language,logger } = answer;
+
+  const esm = `import {logger} from '../config/logger.js'`
+  const cjs = `const {logger} =require('../config/logger.js')`
+
+
+  return `
+  ${language === "typescript" ?"import type {Request,Response,NextFunction} from 'express'":''}
+
+  ${logger !== "none"? module==="commonjs"?cjs:esm :""}
+
+    function ErrorHandler(${language === 'typescript' ? 'err:any,_req:Request,res: Response,next:NextFunction' : 'err,req,res,next'}) {
       let statusCode = err.status || 500;
       let message = err.message || "Internal Server Error"
 
@@ -18,10 +25,7 @@ export function generateError(answer:Answers){
         stack: err.data || err.stack || err,})
     }
 
-    ${module ==='commonjs'?'module.exports={ErrorHandler}':'export {ErrorHandler}'}
+    ${module === 'commonjs' ? 'module.exports={ErrorHandler}' : 'export {ErrorHandler}'}
         
     `
-                                                                                                                                        
-                                                                                                        
-                                                                                                                                                    module.exports = globalErrorHandler;
 }

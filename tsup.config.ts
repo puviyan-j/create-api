@@ -1,11 +1,23 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts", "bin/cli.ts"],
-    format: ["esm"],
-      dts: true,
-        clean: true,
-          sourcemap: true,
-            splitting: false,
-              target: "node22",
-              });
+  entry: ["bin/cli.ts","src/**/*.ts"],
+  format: ["esm"],
+  dts: true,
+  bundle: false,
+  clean: true,
+  sourcemap: true,
+  splitting: false,
+
+  target: "node22",
+  external: [
+    "inquirer",
+    "ora",
+    "chalk",
+    "commander",
+    "fs-extra",
+    "execa"
+  ]
+});
+
+

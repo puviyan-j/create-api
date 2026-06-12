@@ -1,26 +1,37 @@
-export function appfile(module:'commonjs'|'modulejs'){
+export function appfile(module: 'commonjs' | 'modulejs'):string {
 
-if(module === 'commonjs') return cjs();
-if(module === 'modulejs') return mjs()
-    
+    if (module === 'commonjs') return cjs();
+    return mjs()
+
 }
 
-function cjs(){
+function cjs() {
 
-   return `require('dotenv').config();
+    return `
     const express = require('express');
     const app = express();
     const cors = require('cors');
+    const Router = require('./routes/index');
+    const {ErrorHandler} = require('./middlewares/error.middleware');
     app.use(cors());
+    
+    app.use('/v1',Router);
+    app.use(ErrorHandler)
+
     module.exports = app;`
 };
 
 function mjs() {
 
-   return `import 'dotenv/config';
+    return `
     import express from 'express';
     import cors from 'cors';
-const app = express();
-app.use(cors())
-export default app`
+    const app = express();
+    import Router from './routes/index.js';
+    import {ErrorHandler} from './middlewares/error.middleware.js';
+    app.use(cors());
+    app.use('/v1',Router);
+    app.use(ErrorHandler)
+    
+    export default app`
 }
