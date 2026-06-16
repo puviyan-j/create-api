@@ -1,13 +1,14 @@
 {
   "name": "create-api-starter-cli",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Generate production-ready Node.js APIs (Express, NestJS) with TypeScript, validation, database integration, logging, and scalable architecture.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
     "dev": "tsx bin/cli.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "deploy":"npm publish --access public"
   },
   "bin": {
     "create-api-starter-cli": "./dist/bin/cli.js"
@@ -35,7 +36,8 @@
     "node": ">=18"
   },
   "files": [
-    "dist"
+    "dist",
+    "templates"
   ],
   "preferGlobal": true,
   "devDependencies": {
