@@ -3,14 +3,15 @@ import path from "node:path";
 
 export async function generateEnv(
   projectPath: string
-  ) {
-    const envContent = `
+) {
+  const envContent = `
     PORT=5000
     NODE_ENV=development
+    DATABASE=
     `;
 
-      await fs.writeFile(
-          path.join(projectPath, ".env"),
-              envContent.trim()
-                );
-                }
+  await fs.writeFile(
+    path.join(projectPath, ".env"),
+    envContent.trim()
+  );
+}

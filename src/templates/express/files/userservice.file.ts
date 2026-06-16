@@ -12,7 +12,7 @@ const esm = (architecture:Architecture,language:Language) => {
 
     return `
     
-    import * as userRepository from ${architecture === 'mvc' ? "'../repository/user.repository.js'" : "'./user.repository.js'"};
+    import * as userRepository from ${architecture === 'mvc' ? "'../repositorys/user.repository.js'" : "'./user.repository.js'"};
 
     export const getUsers = async () => {
         return await userRepository.findAll();
@@ -38,7 +38,7 @@ const esm = (architecture:Architecture,language:Language) => {
 const cjs = (architecture:Architecture) => {
 
     return`
-    const userRepository = require(${architecture === 'mvc' ? "'../repositorys/user.repository.js'" : "'./user.repository.js'"});
+    const userRepository = require(${architecture === 'mvc' ? "'../repositorys/user.repository'" : "'./user.repository'"});
     
     const getUsers = async () => {
         return await userRepository.findAll();
@@ -60,6 +60,6 @@ const cjs = (architecture:Architecture) => {
         return await userRepository.remove(id);
     };
 
-    module.export = { getUsers, getUserById, createUser, updateUser, deleteUser }`
+    module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser }`
 
 }

@@ -26,7 +26,6 @@ export async function expressTemplate(answer: Answers, projectPath: string) {
 
     await installdependencies(projectPath, answer)
 
-
 }
 
 const packageManagers = {

@@ -13,6 +13,8 @@ import { generateUserservices } from "./files/userservice.file.js";
 import { generateUserRepository } from "./files/userrepository.file.js";
 import { generateUserroutes } from "./files/userrouter.file.js";
 import { generateUserScheam } from "./files/userschema.file.js";
+import { notfoundhandler } from "./files/notfoundhandler.file.js";
+import { createmongooseconnection } from "./files/database/mongoose.js";
 
 export async function createfile(answer: Answers, pathName: string) {
 
@@ -28,9 +30,8 @@ async function mvc(answer: Answers, pathName: string) {
     const { language, module, logger, architecture, orm } = answer
 
     const files = [
-        { name: 'index', content: generateIndex(module) },
+        { name: 'index', content: generateIndex(module, orm) },
         { name: 'app', content: appfile(module) },
-        { name: 'config/db', content: '' },
         { name: 'routes/index', content: RouterIndex(module, language, architecture) },
         { name: 'routes/user.routes', content: generateUserroutes(module, language, architecture) },
         { name: 'controllers/user.controller', content: generateUsercontroller(module, language, architecture) },
@@ -38,20 +39,20 @@ async function mvc(answer: Answers, pathName: string) {
         { name: 'models/user.model', content: generateUserScheam(module, orm, language) },
         { name: 'middlewares/auth.middleware', content: '' },
         { name: 'middlewares/error.middleware', content: generateError(answer) },
-        { name: 'middlewares/asynchandler.middleware', content: asynchandler(module, language) },
+        { name: 'middlewares/notfound.middleware', content: notfoundhandler(answer) },
+        { name: 'utils/asynchandler', content: asynchandler(module, language) },
         { name: 'validations/user.validation', content: "" },
         { name: 'repositorys/user.repository', content: generateUserRepository(module, language, architecture) }
     ];
 
-    const ext = language === 'typescript' ? 'ts' : 'js'
+    const ext = language === 'typescript' ? 'ts' : 'js';
 
+    if (orm === "mongoose") files.push({ name: 'config/db', content: createmongooseconnection(module) })
     if (logger !== "none") files.push({ name: 'config/logger', content: generateLogger(module, language, logger) });
 
     for (let file of files) {
         await fs.writeFile(path.join(pathName, `src/${file.name}.${ext}`), file.content)
     }
-
-
 
 };
 
@@ -61,13 +62,14 @@ async function feature(answer: Answers, pathName: string) {
     const { language, module, logger, architecture, orm } = answer
 
     const files = [
-        { name: 'index', content: generateIndex(module) },
+        { name: 'index', content: generateIndex(module, orm) },
         { name: 'app', content: appfile(module) },
         { name: 'config/db', content: '' },
         { name: 'routes/index', content: RouterIndex(module, language, architecture) },
         { name: 'middlewares/auth.middleware', content: '' },
         { name: 'middlewares/error.middleware', content: generateError(answer) },
-        { name: 'utils/asyncHandler', content: asynchandler(module, language) },
+        { name: 'middlewares/notfound.middleware', content: notfoundhandler(answer) },
+        { name: 'utils/asynchandler', content: asynchandler(module, language) },
         { name: 'modules/user/user.routes', content: generateUserroutes(module, language, architecture) },
         { name: 'modules/user/user.validation', content: "" },
         { name: 'modules/user/user.controller', content: generateUsercontroller(module, language, architecture) },

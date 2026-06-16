@@ -46,7 +46,7 @@ const cjs = (architecture: Architecture) => {
         createUser,
         updateUser,
         deleteUser,
-    } = require(${architecture==="mvc"?"'../controllers/user.controller.js'":"'./user.controller.js'"});
+    } = require(${architecture==="mvc"?"'../controllers/user.controller'":"'./user.controller'"});
 
     const router = express.Router();
 

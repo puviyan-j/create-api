@@ -11,7 +11,7 @@ export function generateUsercontroller(module: Module, language: Language, archi
 const esm = (architecture: Architecture, language: Language) => {
 
     return `
-   import { asyncHandler } from ${architecture === 'mvc' ? "'../utils/asyncHandler.js'" : "'../../utils/asyncHandler.js'"};
+   import { asyncHandler } from ${architecture === 'mvc' ? "'../utils/asynchandler.js'" : "'../../utils/asynchandler.js'"};
    import * as userService from ${architecture === 'mvc' ? "'../services/user.services.js'" : "'./user.services.js'"};
    
    export const getUsers = asyncHandler(async (req, res) => {
@@ -65,8 +65,8 @@ const esm = (architecture: Architecture, language: Language) => {
 
 const cjs = (architecture: Architecture) => {
     return `
-   const { asyncHandler } = require(${architecture === 'mvc' ? "'../utils/asyncHandler.js'" : "'../../utils/asyncHandler.js'"});
-   const userService = require(${architecture === 'mvc' ? "'../services/user.services.js'" : "'./user.services.js'"});
+   const { asyncHandler } = require(${architecture === 'mvc' ? "'../utils/asynchandler'" : "'../../utils/asynchandler'"});
+   const userService = require(${architecture === 'mvc' ? "'../services/user.services'" : "'./user.services'"});
    
    const getUsers = asyncHandler(async (req, res) => {
        const users = await userService.getUsers();
@@ -113,7 +113,7 @@ const cjs = (architecture: Architecture) => {
        });
    });
    
-   module.export = {getUsers ,getUserById ,createUser , updateUser ,deleteUser}
+   module.exports = {getUsers ,getUserById ,createUser , updateUser ,deleteUser}
    `
 
 }

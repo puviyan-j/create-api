@@ -6,14 +6,14 @@ export function RouterIndex(module: Module, language:Language,architecture:Archi
 
     router.get("/health",(req,res)=>{res.json('Api working')});
     
-    router.use("/users",require( ${architecture === "mvc"?"'./users.routes'":"'../modules/user/user.routes'"}));\n
+    router.use("/users",require( ${architecture === "mvc"?"'./user.routes'":"'../modules/user/user.routes'"}));\n
     module.exports = router;
     `
     const esm = `
     import express from 'express';\n
     const router = express.Router();\n
     
-    import userRoutes from ${architecture === "mvc"?"'./users.routes'":"'../modules/user/user.routes.js'"}
+    import userRoutes from ${architecture === "mvc"?"'./user.routes.js'":"'../modules/user/user.routes.js'"}
    
     router.get("/health",(req,res)=>{res.json('Api working')});
 
@@ -24,7 +24,7 @@ export function RouterIndex(module: Module, language:Language,architecture:Archi
     const typescript = `
     import {Router,type Request ,type Response } from 'express';\n
     const router = Router();\n
-    import  userRoutes from ${architecture === "mvc"?"'./users.routes'":"'../modules/user/user.routes.js'"}\n
+    import  userRoutes from ${architecture === "mvc"?"'./user.routes.js'":"'../modules/user/user.routes.js'"}\n
     router.get("/health",(req:Request,res:Response)=>{res.json('Api working')});\n
     router.use('/users',userRoutes)\n
     export default router `

@@ -1,6 +1,6 @@
 {
   "name": "create-api-starter-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate production-ready Node.js APIs (Express, NestJS) with TypeScript, validation, database integration, logging, and scalable architecture.",
   "main": "index.js",
   "scripts": {
