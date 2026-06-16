@@ -1,21 +1,21 @@
 {
   "name": "create-api-starter-cli",
   "version": "1.0.2",
-  "description": "🚀 Create production-ready Express.js APIs in seconds.",
+  "description": "Generate production-ready Node.js APIs (Express, NestJS) with TypeScript, validation, database integration, logging, and scalable architecture.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
-    "dev": "tsx bin/cli.ts "
+    "dev": "tsx bin/cli.ts ",
+    "format": "prettier --write ."
   },
-  "bin":{
-    "create-api":"./dist/bin/cli.js"
+  "bin": {
+    "create-api": "./dist/bin/cli.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/puviyan-j/create-api.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
@@ -32,10 +32,39 @@
     "ora": "^9.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.9.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
     "tsup": "^8.5.1",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
-  }
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.0"
+  },
+  "keywords": [
+    "backend-cli",
+    "node-cli",
+    "express-cli",
+    "nestjs-cli",
+    "api-starter",
+    "backend-starter",
+    "node-starter",
+    "project-generator",
+    "boilerplate-generator",
+    "scaffold-cli",
+    "express-boilerplate",
+    "nestjs-boilerplate",
+    "typescript-backend",
+    "javascript-backend",
+    "mvc-architecture",
+    "feature-based-architecture",
+    "rest-api",
+    "api-generator",
+    "fullstack-backend",
+    "production-ready",
+    "eslint-prettier",
+    "mongodb-starter",
+    "developer-tool"
+  ]
 }

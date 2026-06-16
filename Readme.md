@@ -1,10 +1,48 @@
 # create-api-starter-cli
 
-🚀 Scaffold production-ready Express.js and NestJS APIs in seconds.
+Stop wasting 30 minutes setting up Node.js backends.
+
+🚀 Generate production-ready Express.js or NestJS APIs with TypeScript, validation, and database setup in seconds.
 
 Create modern backend applications with TypeScript or JavaScript, built-in linting, formatting, validation, database integration, and best-practice project structure.
 
-No boilerplate. No repetitive setup. Just start building.
+No setup. No configuration. No boilerplate.
+
+Just build.
+
+## Quick Start
+
+### Using npx
+
+```bash
+npx create-api-starter-cli
+```
+
+### Global Installation
+
+```bash
+npm install -g create-api-starter-cli
+```
+
+Then run:
+
+```bash
+create-api-starter-cli
+```
+
+## ⚡ What you get instantly
+
+No setup. No configuration. Just build.
+
+## 💡 Example Output
+
+A single command gives you:
+
+- REST API structure
+- Authentication-ready foundation
+- Scalable architecture
+- Clean code setup
+- Database integration
 
 ## Features
 
@@ -42,23 +80,17 @@ Initialize your API with database support:
 * MongoDB
 * SQLite
 
-### Developer Experience
+### ⚡ Production-ready by default
 
-Pre-configured tooling included:
+Everything configured for real-world applications:
 
-* ESLint
-* Prettier
-* Environment variables (.env)
-* Development scripts
-* Production-ready configuration
+- ESLint + Prettier (clean code)
+- Environment variables (.env setup)
+- Logging system ready
+- Security middleware (CORS, Helmet)
+- Folder structure (scalable architecture)
 
 ### Interactive CLI
-
-Guided setup experience:
-
-```bash
-npx create-api-starter-cli
-```
 
 Example flow:
 
@@ -76,37 +108,21 @@ Example flow:
 ✔ Project ready!
 ```
 
-## Quick Start
-
-### Using npx
-
-```bash
-npx create-api-starter-cli
-```
-
-### Global Installation
-
-```bash
-npm install -g create-api-starter-cli
-```
-
-Then run:
-
-```bash
-create-api
-```
-
 ## Why create-api-starter-cli?
 
-Setting up a backend project often means spending 15–30 minutes configuring:
+Every backend project starts the same way:
 
-* TypeScript
+* Setup project
+* Configure TypeScript
+* Install dependencies
 * ESLint
 * Prettier
 * Validation libraries
 * Database packages
-* Folder structure
+* Create folder structure
 * Environment variables
+
+This takes 15–30 minutes every time.
 
 This CLI automates the entire process so you can start building immediately.
 
@@ -120,6 +136,41 @@ This CLI automates the entire process so you can start building immediately.
 * CI/CD templates
 * Microservice starter templates
 
+
+## ⚔️ create-api-starter-cli vs Express Generator
+
+Most developers start with Express Generator, but it only solves the *very basic setup problem*.
+
+Here’s the difference:
+
+| Feature | Express Generator | create-api-starter-cli |
+|--------|------------------|--------------------------|
+| Project structure | Basic MVC | MVC + Feature-based architecture |
+| TypeScript support | ❌ Not built-in | ✅ Built-in |
+| Validation | ❌ None | ✅ Zod / Joi |
+| Logging | ❌ None | ✅ Pino / Winston |
+| Security (Helmet, CORS) | ❌ Manual setup | ✅ Pre-configured |
+| Environment setup | Basic | Production-ready |
+| Database setup | ❌ Not included | ✅ MongoDB / SQL support |
+| ORM support | ❌ None | ✅ Prisma / Drizzle / Sequelize |
+| Code quality tools | ❌ Not included | ✅ ESLint + Prettier |
+| CLI experience | Basic scaffolding | Interactive guided setup |
+| Production readiness | ❌ Minimal | ✅ Production-ready by default |
+
+---
+
+
+> Express Generator gives you a starting point.  
+> create-api-starter-cli gives you a production-ready backend.
+
+---
+
+Stop building boilerplate. Start building features.
+
 ## License
 
 ISC
+
+## Support
+
+⭐ If this saved you time, consider starring the repo.

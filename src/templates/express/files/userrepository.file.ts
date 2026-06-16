@@ -13,25 +13,23 @@ const esm = (architecture: Architecture, language: Language) => {
     return `
 
     export const findAll = async () => {
-        return await User.find();
+        return [];
     };
 
     export const findById = async (id) => {
-        return await User.findById(id);
+        return {};
     };
 
     export const create = async (data) => {
-        return await User.create(data);
+        return {};
     };
 
     export const update = async (id, data) => {
-        return await User.findByIdAndUpdate(id, data, {
-            new: true,
-        });
+        return {}
     };
 
     export const remove = async (id) => {
-        return await User.findByIdAndDelete(id);
+        return {};
     };`
 }
 

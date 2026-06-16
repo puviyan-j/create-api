@@ -75,12 +75,11 @@ src/
 project-root/
 │
 ├── src/
-│   ├── config/              # Environment & app config
-│   │   ├── env.js
+│   ├── config/                     # Environment & app config
 │   │   ├── db.js
-│   │   └── server.js
+│   │   └── logger.js
 │   │
-│   ├── modules/            # FEATURE-BASED CORE (important)
+│   ├── modules/                    # FEATURE-BASED CORE (important)
 │   │   ├── user/
 │   │   │   ├── user.controller.js
 │   │   │   ├── user.service.js
@@ -102,38 +101,40 @@ project-root/
 │   │       ├── product.routes.js
 │   │       └── product.model.js
 │   │
-│   ├── middlewares/        # Global middlewares
+│   ├── middlewares/                # Global middlewares
 │   │   ├── errorHandler.js
-│   │   ├── authMiddleware.js
-│   │   └── logger.js
+│   │   └── authMiddleware.js
 │   │
-│   ├── routes/             # Route aggregator (optional)
+│   ├── routes/                     # Route aggregator (optional)
 │   │   └── index.js
 │   │
-│   ├── utils/              # Helper functions
+│   ├── utils/                      # Helper functions
 │   │   ├── response.js
 │   │   ├── asyncHandler.js
 │   │   └── helpers.js
 │   │
-│   ├── services/          # Shared services (email, redis, etc.)
+│   ├── services/                   # Shared services (email, redis, etc.)
 │   │   ├── email.service.js
 │   │   ├── redis.service.js
 │   │   └── logger.service.js
 │   │
-│   ├── jobs/              # Background jobs / queues
+│   ├── jobs/                       # Background jobs / queues
 │   │   ├── email.job.js
 │   │   └── cleanup.job.js
 │   │
-│   ├── app.js             # Express app setup
-│   └── server.js          # Entry point
+│   ├── app.js                      # Express app setup
+│   └── server.js                   # Entry point
 │
-├── tests/                 # Unit/integration tests
+├── tests/                          # Unit/integration tests
 ├── logs/
 ├── scripts/
 ├── docs/
 │
 ├── .env
+├── .api-starter.json
 ├── .gitignore
+├── .prettierrc
+├── eslint.config.js
 ├── package.json
 └── README.md
 

@@ -36,15 +36,15 @@ const packageManagers = {
 }
 
 async function installdependencies(projectPath: string, answer: Answers) {
-    const { language, validation, database, orm, logger, module, packageManager ,projectName} = answer
+    const { language, validation, database, orm, logger, module, packageManager, projectName } = answer
     const dependencies = ["express", "cors", "helmet", "dotenv"];
-    const devdependencies = ["prettier", "eslint"];
+    const devdependencies = ["prettier", "eslint", "@eslint/js", "globals"];
 
     const istypescript = language === "typescript" ? true : false
 
     if (istypescript) {
-        devdependencies.push("@types/node", "@types/express", "@types/cors")
-    }
+        devdependencies.push("@types/node", "@types/express", "@types/cors", "typescript-eslint")
+    };
 
     if (validation !== "none") {
         dependencies.push(validation)
@@ -73,7 +73,7 @@ async function installdependencies(projectPath: string, answer: Answers) {
 
     devSpinner.succeed('DevDependencies installed');
 
-    lastlog(projectName,packageManager)
+    lastlog(projectName, packageManager)
 
 };
 
@@ -84,7 +84,7 @@ const runCommand = (packageManager: "npm" | "pnpm" | "yarn") => packageManager =
         ? 'yarn dev'
         : 'pnpm dev';
 
-const lastlog = (projectName:string,packageManager: "npm" | "pnpm" | "yarn") => {
+const lastlog = (projectName: string, packageManager: "npm" | "pnpm" | "yarn") => {
     console.log('\n' + chalk.green('✔ Project created successfully!') + '\n');
     console.log(chalk.cyan('Next steps:'));
     console.log('');

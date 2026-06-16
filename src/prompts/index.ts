@@ -19,13 +19,6 @@ export async function getAnswers() {
     }
 
     if (answer.framework === "nest") return answer;
-    // const express = {
-    //     packageManager: await packageManagerPrompt(),
-    //     architecture: await architecturePrompt(),
-    //     validation: await validationPrompt(),
-
-    //     database: await databasePrompt(),
-    // }
 
     (answer as Answers).packageManager = "npm";
     (answer as Answers).language = await languagePrompt();
@@ -36,12 +29,10 @@ export async function getAnswers() {
         architecture: await architecturePrompt(),
         validation: await validationPrompt(),
         logger: await loggerPrompt(),
-        database: "none",
+        database: await databasePrompt(),
     }
 
     const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database)
-
-
 
     return {
         ...answer, ...express, orm
