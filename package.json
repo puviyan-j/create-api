@@ -1,22 +1,22 @@
 {
   "name": "create-api-starter-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate production-ready Node.js APIs (Express, NestJS) with TypeScript, validation, database integration, logging, and scalable architecture.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup",
-    "dev": "tsx bin/cli.ts ",
+    "dev": "tsx bin/cli.ts",
     "format": "prettier --write ."
   },
   "bin": {
-    "create-api": "./dist/bin/cli.js"
+    "create-api-starter-cli": "./dist/bin/cli.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/puviyan-j/create-api.git"
   },
-  "author": "",
+  "author": "puviyan",
   "license": "ISC",
   "type": "module",
   "bugs": {
@@ -31,6 +31,13 @@
     "inquirer": "^14.0.2",
     "ora": "^9.4.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
+  "preferGlobal": true,
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/fs-extra": "^11.0.4",
@@ -65,6 +72,14 @@
     "production-ready",
     "eslint-prettier",
     "mongodb-starter",
-    "developer-tool"
+    "developer-tool",
+    "api generator",
+    "node api generator",
+    "express starter",
+    "nestjs starter",
+    "backend generator",
+    "cli boilerplate",
+    "typescript cli",
+    "rest api generator"
   ]
 }
