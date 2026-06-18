@@ -11,12 +11,14 @@ export async function generatepackage(pathName: string, answer: Answers) {
     "main": "index.js",
     "scripts": {
     "start":language=== "javascript"?"node src/index.js": "node dist/index.js",
-    "dev":language==="javascript"?"node --watch index.js":"tsx src/index.ts",
+    "dev":language==="javascript"?"node --watch src/index.js":"tsx src/index.ts",
+    "format":"prettier --write .",
+    "lint":"eslint"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "type": module
+    "type": module==="modulejs" ?"module":"commonjs"
     }
 
     language==="typescript"&&(content.scripts.build="tsc");
