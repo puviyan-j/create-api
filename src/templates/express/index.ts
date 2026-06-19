@@ -5,11 +5,10 @@ import { generatetsconfigfile } from "./files/tsconfig.file.js"
 import { execa } from 'execa'
 import { confirm } from "@inquirer/prompts";
 import ora from "ora"
+import chalk from 'chalk';
 
 export async function expressTemplate(answer: Answers, projectPath: string) {
-
     const { language, architecture } = answer;
-
     const spinner = ora('create folders').start();
 
     await generateFolders(answer, projectPath);
@@ -76,7 +75,7 @@ async function installdependencies(projectPath: string, answer: Answers) {
 
 };
 
-import chalk from 'chalk';
+
 const runCommand = (packageManager: "npm" | "pnpm" | "yarn") => packageManager === 'npm'
     ? 'npm run dev'
     : packageManager === 'yarn'

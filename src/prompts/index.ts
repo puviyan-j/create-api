@@ -20,7 +20,7 @@ export async function getAnswers() {
 
     if (answer.framework === "nest") return answer;
 
-    (answer as Answers).packageManager = "npm";
+    (answer as Answers).packageManager = await packageManagerPrompt();
     (answer as Answers).language = await languagePrompt();
     (answer as Answers).module = (answer as Answers).language ==="typescript"?"modulejs":await modulePrompt();
   

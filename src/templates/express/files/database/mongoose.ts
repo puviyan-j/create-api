@@ -10,6 +10,7 @@ async function connectDb() {
         console.log("database connected successfull")
 
     } catch (error) {
+        throw error;
         console.log("database connected failed")
     }
 }

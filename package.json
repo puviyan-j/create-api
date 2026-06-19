@@ -1,6 +1,6 @@
 {
   "name": "create-api-starter-cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate production-ready Node.js APIs (Express, NestJS) with TypeScript, validation, database integration, logging, and scalable architecture.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "deploy":"npm publish --access public"
   },
   "bin": {
-    "create-api-starter-cli": "./dist/bin/cli.js"
+    "create-api-starter-cli": "./dist/bin/cli.js",
+    "api-cli":"./dist/bin/cli.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,8 @@
     "typescript-eslint": "^8.61.0"
   },
   "keywords": [
+    "express",
+    "nest",
     "backend-cli",
     "node-cli",
     "express-cli",

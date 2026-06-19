@@ -35,6 +35,7 @@ function mjs() {
     import { notfoundHandler } from './middlewares/notfound.middleware.js';
 
     app.use(cors());
+    app.use(express.json())
 
     app.use('/v1',Router);
     app.use(ErrorHandler);

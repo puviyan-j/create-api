@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // go to project root (dist -> root)
-const rootDir = path.resolve(__dirname, "../../../");
+const rootDir = path.resolve(__dirname, "../../");
 
 export async function generatorEslint(answer: Answers, pathname: string) {
 

@@ -84,8 +84,5 @@ async function feature(answer: Answers, pathName: string) {
 
     for (let file of files) {
         await fs.writeFile(path.join(pathName, `src/${file.name}.${ext}`), file.content)
-    }
-
-
-
+    };
 };
