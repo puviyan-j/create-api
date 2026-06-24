@@ -30,6 +30,22 @@ Then run:
 create-api-starter-cli
 ```
 
+## Generate a Module
+
+Generate a complete module with all required layers.
+
+```bash
+create-api-starter-cli generate module <name>
+```
+
+### Example
+
+```bash
+api-cli generate module user
+```
+
+
+
 ## ⚡ What you get instantly
 
 No setup. No configuration. Just build.
