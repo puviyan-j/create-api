@@ -4,10 +4,10 @@ export interface Answers {
   language: "typescript" | "javascript";
   architecture: "mvc" | "feature";
   module: 'commonjs' | 'modulejs'
-  validation: "zod" | "joi" | "none";
+  validation: "zod" | "joi" | "other" | "none";
   logger: "pino" | "winston" | "none";
-  database: "mongodb" | "mysql" | "postgresql" | "none";
-  orm: 'mongoose' | 'drizzle' | 'prisma' | "sequelize" | "none";
+  database: "mongodb" | "mysql" | "postgresql" | "other" | "none";
+  orm: 'mongoose' | 'drizzle' | 'prisma' | "sequelize" | "other" | "none";
   framework: 'express' | 'nest'
 }
 

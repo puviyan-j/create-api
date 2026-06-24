@@ -11,9 +11,7 @@ import { packageManagerPrompt } from './package-manager.js'
 import { projectPrompt } from './project.prompt.js'
 import { validationPrompt } from './validation.prompt.js'
 export async function getAnswers() {
-
-
-    const answer:Answers|nestProject = {
+    const answer: Answers | nestProject = {
         projectName: await projectPrompt(),
         framework: await frameworkPrompt(),
     }
@@ -22,8 +20,8 @@ export async function getAnswers() {
 
     (answer as Answers).packageManager = await packageManagerPrompt();
     (answer as Answers).language = await languagePrompt();
-    (answer as Answers).module = (answer as Answers).language ==="typescript"?"modulejs":await modulePrompt();
-  
+    (answer as Answers).module = (answer as Answers).language === "typescript" ? "modulejs" : await modulePrompt();
+
 
     const express = {
         architecture: await architecturePrompt(),
@@ -38,4 +36,30 @@ export async function getAnswers() {
         ...answer, ...express, orm
     }
 
+}
+
+export async function rebuildanswer():Promise<Answers> {
+
+    const basic = {
+        projectName: "",
+        framework: "express" as const,
+        packageManager : await packageManagerPrompt(),
+        language : await languagePrompt(),
+    };
+
+    const module = basic.language === "typescript" ? "modulejs" : await modulePrompt();
+
+    const express = {
+        architecture: await architecturePrompt(),
+        validation: await validationPrompt(),
+        logger: await loggerPrompt(),
+        database: await databasePrompt(),
+    }
+
+    const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database)
+    
+
+    return {
+        ...basic,module,...express, orm
+    }
 }

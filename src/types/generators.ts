@@ -1,4 +1,5 @@
 export interface ResourceGenerator {
   name: string;
-  crud?: boolean;
+  type: "module",
+  crud?: boolean
 }

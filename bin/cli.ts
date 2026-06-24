@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { run } from "../src/index.js";
+import { add, run } from "../src/index.js";
 import { generator } from "../src/index.js";
 import { Command } from "commander"
 
@@ -18,23 +18,21 @@ program
     .action(() => { run(); });
 
 program
-    .command('generate')
+    .command("generate <type> <name>")
     .alias('g')
-    .description('Generate resources')
-    .argument('<name>')
-    .option('-c,--crud')
-    .action((name, options) => {
-        const data = { name, ...options };
+    .option('--crud')
+    .action((type,name, options) => {
+        const data = { type,name, ...options };
         console.log(data)
         generator(data)
     });
 
 program
-    .command('add')
+    .command('add [features...]')
     .alias('a')
-    .option('--swager')
-    .action((options) => {
-        console.log({ ...options })
+    .action((features) => {
+        console.log(features);
+        add(features)
     })
 
 program.parse();

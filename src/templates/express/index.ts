@@ -6,6 +6,7 @@ import { execa } from 'execa'
 import { confirm } from "@inquirer/prompts";
 import ora from "ora"
 import chalk from 'chalk';
+import { packageManagers } from "../../utils.js";
 
 export async function expressTemplate(answer: Answers, projectPath: string) {
     const { language, architecture } = answer;
@@ -18,20 +19,16 @@ export async function expressTemplate(answer: Answers, projectPath: string) {
 
     const installdep = await confirm({ message: "Install dependencies", default: false })
 
-    if (language === 'typescript') await generatetsconfigfile(projectPath)
-    if (!installdep) {
-        return;
-    };
+    if (language === 'typescript') await generatetsconfigfile(projectPath);
+
+    if (!installdep) return;
+
 
     await installdependencies(projectPath, answer)
 
 }
 
-const packageManagers = {
-    npm: "install",
-    pnpm: "add",
-    yarn: "add"
-}
+
 
 async function installdependencies(projectPath: string, answer: Answers) {
     const { language, validation, database, orm, logger, module, packageManager, projectName } = answer
