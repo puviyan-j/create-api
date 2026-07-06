@@ -1,65 +1,66 @@
-
-import type { Answers, nestProject } from '../types/answers.js'
-import { architecturePrompt } from './architecture.prompt.js'
-import { databasePrompt } from './database.prompt.js'
-import { frameworkPrompt } from './framework.prompt.js'
-import { languagePrompt } from './language.prompt.js'
-import { loggerPrompt } from './logger.prompt.js'
-import { modulePrompt } from './module.prompt.js'
-import { ormPrompt } from './orm.prompt.js'
-import { packageManagerPrompt } from './package-manager.js'
-import { projectPrompt } from './project.prompt.js'
-import { validationPrompt } from './validation.prompt.js'
+import type { Answers, nestProject } from '../types/answers.js';
+import { architecturePrompt } from './architecture.prompt.js';
+import { databasePrompt } from './database.prompt.js';
+import { frameworkPrompt } from './framework.prompt.js';
+import { languagePrompt } from './language.prompt.js';
+import { loggerPrompt } from './logger.prompt.js';
+import { modulePrompt } from './module.prompt.js';
+import { ormPrompt } from './orm.prompt.js';
+import { packageManagerPrompt } from './package-manager.js';
+import { projectPrompt } from './project.prompt.js';
+import { validationPrompt } from './validation.prompt.js';
 export async function getAnswers() {
-    const answer: Answers | nestProject = {
-        projectName: await projectPrompt(),
-        framework: await frameworkPrompt(),
-    }
+  const answer: Answers | nestProject = {
+    projectName: await projectPrompt(),
+    framework: await frameworkPrompt(),
+  };
 
-    if (answer.framework === "nest") return answer;
+  if (answer.framework === 'nest') return answer;
 
-    (answer as Answers).packageManager = await packageManagerPrompt();
-    (answer as Answers).language = await languagePrompt();
-    (answer as Answers).module = (answer as Answers).language === "typescript" ? "modulejs" : await modulePrompt();
+  (answer as Answers).packageManager = await packageManagerPrompt();
+  (answer as Answers).language = await languagePrompt();
+  (answer as Answers).module =
+    (answer as Answers).language === 'typescript' ? 'modulejs' : await modulePrompt();
 
+  const express = {
+    architecture: await architecturePrompt(),
+    validation: await validationPrompt(),
+    logger: await loggerPrompt(),
+    database: await databasePrompt(),
+  };
 
-    const express = {
-        architecture: await architecturePrompt(),
-        validation: await validationPrompt(),
-        logger: await loggerPrompt(),
-        database: await databasePrompt(),
-    }
+  const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database);
 
-    const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database)
-
-    return {
-        ...answer, ...express, orm
-    }
-
+  return {
+    ...answer,
+    ...express,
+    orm,
+  };
 }
 
-export async function rebuildanswer():Promise<Answers> {
+export async function rebuildanswer(): Promise<Answers> {
+  const basic = {
+    projectName: '',
+    framework: 'express' as const,
+    packageManager: await packageManagerPrompt(),
+    language: await languagePrompt(),
+  };
 
-    const basic = {
-        projectName: "",
-        framework: "express" as const,
-        packageManager : await packageManagerPrompt(),
-        language : await languagePrompt(),
-    };
+  const module = basic.language === 'typescript' ? 'modulejs' : await modulePrompt();
 
-    const module = basic.language === "typescript" ? "modulejs" : await modulePrompt();
+  const express = {
+    architecture: await architecturePrompt(),
+    validation: await validationPrompt(),
+    logger: await loggerPrompt(),
+    database: await databasePrompt(),
+  };
 
-    const express = {
-        architecture: await architecturePrompt(),
-        validation: await validationPrompt(),
-        logger: await loggerPrompt(),
-        database: await databasePrompt(),
-    }
+  const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database);
 
-    const orm = express.database === 'none' ? 'none' : await ormPrompt(express.database)
-    
-
-    return {
-        ...basic,module,...express, orm
-    }
+  return {
+    ...basic,
+    module,
+    ...express,
+    orm,
+  };
 }

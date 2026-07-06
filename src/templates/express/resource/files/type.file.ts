@@ -1,3 +1,3 @@
 export function generatetypes() {
-    return ''
-};
+  return '';
+}

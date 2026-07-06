@@ -1,14 +1,17 @@
-import type { Module, Language, Architecture } from "../../../../types/answers.js"
+import type { Module, Language, Architecture } from '../../../../types/answers.js';
 
-export function generatecontroller(module: Module, language: Language, architecture: Architecture, name: string) {
-
-    if (module === "commonjs") return cjs(architecture, name);
-    return esm(architecture, language, name);
+export function generatecontroller(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+  name: string,
+) {
+  if (module === 'commonjs') return cjs(architecture, name);
+  return esm(architecture, language, name);
 }
 
 const esm = (architecture: Architecture, language: Language, name: string) => {
-
-    return `
+  return `
    import { asyncHandler } from ${architecture === 'mvc' ? "'../utils/asynchandler.js'" : "'../../utils/asynchandler.js'"};
    import * as ${name}Service from ${architecture === 'mvc' ? `'../services/${name}.services.js'` : `'./${name}.services.js'`};
    
@@ -57,12 +60,11 @@ const esm = (architecture: Architecture, language: Language, name: string) => {
        });
    });
    
-   `
-
-}
+   `;
+};
 
 const cjs = (architecture: Architecture, name: string) => {
-    return `
+  return `
    const { asyncHandler } = require(${architecture === 'mvc' ? "'../utils/asynchandler'" : "'../../utils/asynchandler'"});
    const ${name}Service = require(${architecture === 'mvc' ? `'../services/${name}.services'` : `'./${name}.services'`});
    
@@ -112,6 +114,5 @@ const cjs = (architecture: Architecture, name: string) => {
    });
    
    module.exports = {get${name}s ,get${name}ById ,create${name} , update${name} ,delete${name}}
-   `
-
-}
+   `;
+};

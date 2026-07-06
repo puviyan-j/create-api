@@ -1,15 +1,18 @@
-import type { Module, Language, Architecture } from "../../../../types/answers.js";
+import type { Module, Language, Architecture } from '../../../../types/answers.js';
 
-export function generateRepository(module: Module, language: Language, architecture: Architecture, name: string) {
+export function generateRepository(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+  name: string,
+) {
+  if (module === 'commonjs') return cjs(architecture);
 
-    if (module === "commonjs") return cjs(architecture);
-
-    return esm(architecture, language);
+  return esm(architecture, language);
 }
 
 const esm = (architecture: Architecture, language: Language) => {
-
-    return `
+  return `
     export const findAll = async () => {
         return [];
     };
@@ -29,12 +32,11 @@ const esm = (architecture: Architecture, language: Language) => {
     export const remove = async (id) => {
         return {};
     };
-`
-}
+`;
+};
 
 const cjs = (architecture: Architecture) => {
-
-    return `
+  return `
     const findAll = async () => {
         return [];
     };
@@ -57,5 +59,5 @@ const cjs = (architecture: Architecture) => {
 
     module.exports = { findAll ,findById ,create ,update , remove };
 
-    `
-}
+    `;
+};

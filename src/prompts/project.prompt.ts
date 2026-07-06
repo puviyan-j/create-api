@@ -1,8 +1,8 @@
-import { input } from "@inquirer/prompts";
+import { input } from '@inquirer/prompts';
 
 export async function projectPrompt() {
   return input({
-      message: "Project name:",
-          default: "my-api",
-            });
-            }
+    message: 'Project name:',
+    default: 'my-api',
+  });
+}

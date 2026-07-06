@@ -1,16 +1,18 @@
-import type { Module, Language, Architecture } from "../../../../types/answers.js";
+import type { Module, Language, Architecture } from '../../../../types/answers.js';
 
-export function generateservices(module: Module, language: Language, architecture: Architecture, name: string) {
+export function generateservices(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+  name: string,
+) {
+  if (module === 'commonjs') return cjs(architecture, name);
 
-    if (module === "commonjs") return cjs(architecture, name);
-
-    return esm(architecture, language, name)
-
+  return esm(architecture, language, name);
 }
 
 const esm = (architecture: Architecture, language: Language, name: string) => {
-
-    return `
+  return `
     import * as ${name}Repository from ${architecture === 'mvc' ? `'../repositorys/${name}.repository.js'` : `'./${name}.repository.js'`};
 
     export const get${name}s = async () => {
@@ -32,12 +34,11 @@ const esm = (architecture: Architecture, language: Language, name: string) => {
     export const delete${name} = async (id) => {
         return await ${name}Repository.remove(id);
     };
-`
-}
+`;
+};
 
 const cjs = (architecture: Architecture, name: string) => {
-
-    return `
+  return `
     const ${name}Repository = require(${architecture === 'mvc' ? "'../repositorys/user.repository'" : "'./user.repository'"});
     
     const get${name} = async () => {
@@ -61,6 +62,5 @@ const cjs = (architecture: Architecture, name: string) => {
     };
 
     module.exports = { get${name}s ,get${name}ById, create${name}, update${name}, delete${name} }
-    `
-
-}
+    `;
+};

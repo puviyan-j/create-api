@@ -1,1 +1,1 @@
-export type Feature = "mail" | "swagger" | "multer";
+export type Feature = 'mail' | 'swagger' | 'multer';

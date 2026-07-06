@@ -1,5 +1,7 @@
-import type { Module, Language, Validation } from "../../../types/answers.js";
+import type { Module, Language, Validation } from '../../../types/answers.js';
 
-export function generateUservalidation(module: Module, language: Language, validation: Validation) {
-
-}
+export function generateUservalidation(
+  module: Module,
+  language: Language,
+  validation: Validation,
+) {}

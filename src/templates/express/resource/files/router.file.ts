@@ -1,16 +1,18 @@
-import type { Architecture, Language, Module } from "../../../../types/answers.js";
+import type { Architecture, Language, Module } from '../../../../types/answers.js';
 
-export function generateroutes(module: Module, language: Language, architecture: Architecture, name: string) {
+export function generateroutes(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+  name: string,
+) {
+  if (module === 'commonjs') return cjs(architecture, name);
 
-    if (module === "commonjs") return cjs(architecture ,name);
-
-    return esm(architecture, language, name)
-
-};
+  return esm(architecture, language, name);
+}
 
 const esm = (architecture: Architecture, language: Language, name: string) => {
-
-    return `
+  return `
     import express from "express";
     import {
         get${name}s,
@@ -18,7 +20,7 @@ const esm = (architecture: Architecture, language: Language, name: string) => {
         create${name},
         update${name},
         delete${name},
-    } from ${architecture === "mvc" ? `'../controllers/${name}.controller.js'` : `'./${name}.controller.js'`};
+    } from ${architecture === 'mvc' ? `'../controllers/${name}.controller.js'` : `'./${name}.controller.js'`};
 
     const router = express.Router();
 
@@ -33,12 +35,11 @@ const esm = (architecture: Architecture, language: Language, name: string) => {
         .delete(delete${name});    
 
 
-    export default router;`
+    export default router;`;
 };
 
 const cjs = (architecture: Architecture, name: string) => {
-
-    return `
+  return `
     const express= require("express");
     const {
         get${name}s,
@@ -47,7 +48,7 @@ const cjs = (architecture: Architecture, name: string) => {
         update${name},
         delete${name},
        
-    } = require(${architecture === "mvc" ? `'../controllers/${name}.controller'` : `'./${name}.controller'`});
+    } = require(${architecture === 'mvc' ? `'../controllers/${name}.controller'` : `'./${name}.controller'`});
 
     const router = express.Router();
 
@@ -61,5 +62,5 @@ const cjs = (architecture: Architecture, name: string) => {
         .put(update${name})
         .delete(delete${name});
        
-    module.exports = router;`
-}
+    module.exports = router;`;
+};

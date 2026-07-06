@@ -1,13 +1,10 @@
-export function appfile(module: 'commonjs' | 'modulejs'):string {
-
-    if (module === 'commonjs') return cjs();
-    return mjs()
-
+export function appfile(module: 'commonjs' | 'modulejs'): string {
+  if (module === 'commonjs') return cjs();
+  return mjs();
 }
 
 function cjs() {
-
-    return `
+  return `
     const express = require('express');
     const app = express();
     const cors = require('cors');
@@ -21,12 +18,11 @@ function cjs() {
     app.use(ErrorHandler)
     app.use(notfoundHandler)
 
-    module.exports = app;`
-};
+    module.exports = app;`;
+}
 
 function mjs() {
-
-    return `
+  return `
     import express from 'express';
     import cors from 'cors';
     const app = express();
@@ -41,5 +37,5 @@ function mjs() {
     app.use(ErrorHandler);
     app.use(notfoundHandler)
     
-    export default app`
+    export default app`;
 }

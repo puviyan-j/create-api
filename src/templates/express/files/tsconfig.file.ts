@@ -1,52 +1,52 @@
-import fs from "fs-extra";
-import path from "path"
-export const generatetsconfigfile = async (pathname:string) =>{
-    const data ={
-  // Visit https://aka.ms/tsconfig to read more about this file
-  "compilerOptions": {
-    // File Layout
-    "rootDir": "./src",
-    "outDir": "./dist",
+import fs from 'fs-extra';
+import path from 'path';
+export const generatetsconfigfile = async (pathname: string) => {
+  const data = {
+    // Visit https://aka.ms/tsconfig to read more about this file
+    compilerOptions: {
+      // File Layout
+      rootDir: './src',
+      outDir: './dist',
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": ["node","express","cors"],
-    // For nodejs:
-    // "lib": ["esnext"],
-   
-    // and npm install -D @types/node
+      // Environment Settings
+      // See also https://aka.ms/tsconfig/module
+      module: 'nodenext',
+      target: 'esnext',
+      types: ['node', 'express', 'cors'],
+      // For nodejs:
+      // "lib": ["esnext"],
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+      // and npm install -D @types/node
 
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+      // Other Outputs
+      sourceMap: true,
+      declaration: true,
+      declarationMap: true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
+      // Stricter Typechecking Options
+      noUncheckedIndexedAccess: true,
+      exactOptionalPropertyTypes: true,
 
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  },
-  // "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
-}
+      // Style Options
+      // "noImplicitReturns": true,
+      // "noImplicitOverride": true,
+      // "noUnusedLocals": true,
+      // "noUnusedParameters": true,
+      // "noFallthroughCasesInSwitch": true,
+      // "noPropertyAccessFromIndexSignature": true,
 
-  await fs.writeJSON(path.join(pathname,'tsconfig.json'),data,{spaces:2})
-}
+      // Recommended Options
+      strict: true,
+      jsx: 'react-jsx',
+      verbatimModuleSyntax: true,
+      isolatedModules: true,
+      noUncheckedSideEffectImports: true,
+      moduleDetection: 'force',
+      skipLibCheck: true,
+    },
+    // "include": ["src/**/*"],
+    exclude: ['node_modules', 'dist'],
+  };
+
+  await fs.writeJSON(path.join(pathname, 'tsconfig.json'), data, { spaces: 2 });
+};

@@ -1,16 +1,17 @@
-import type { Module, Language, Architecture } from "../../../types/answers.js"
+import type { Module, Language, Architecture } from '../../../types/answers.js';
 
-export function generateUsercontroller(module: Module, language: Language, architecture: Architecture) {
+export function generateUsercontroller(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+) {
+  if (module === 'commonjs') return cjs(architecture);
 
-    if (module === "commonjs") return cjs(architecture);
-
-    return esm(architecture, language)
-
+  return esm(architecture, language);
 }
 
 const esm = (architecture: Architecture, language: Language) => {
-
-    return `
+  return `
    import { asyncHandler } from ${architecture === 'mvc' ? "'../utils/asynchandler.js'" : "'../../utils/asynchandler.js'"};
    import * as userService from ${architecture === 'mvc' ? "'../services/user.services.js'" : "'./user.services.js'"};
    
@@ -57,14 +58,11 @@ const esm = (architecture: Architecture, language: Language) => {
            success: true,
            message: "User deleted successfully",
        });
-   });`
-
-
-
-}
+   });`;
+};
 
 const cjs = (architecture: Architecture) => {
-    return `
+  return `
    const { asyncHandler } = require(${architecture === 'mvc' ? "'../utils/asynchandler'" : "'../../utils/asynchandler'"});
    const userService = require(${architecture === 'mvc' ? "'../services/user.services'" : "'./user.services'"});
    
@@ -114,6 +112,5 @@ const cjs = (architecture: Architecture) => {
    });
    
    module.exports = {getUsers ,getUserById ,createUser , updateUser ,deleteUser}
-   `
-
-}
+   `;
+};

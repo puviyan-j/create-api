@@ -1,16 +1,17 @@
-import type { Module, Language, Architecture } from "../../../types/answers.js";
+import type { Module, Language, Architecture } from '../../../types/answers.js';
 
-export function generateUserservices(module: Module, language: Language, architecture: Architecture) {
+export function generateUserservices(
+  module: Module,
+  language: Language,
+  architecture: Architecture,
+) {
+  if (module === 'commonjs') return cjs(architecture);
 
-    if (module === "commonjs") return cjs(architecture);
-
-    return esm(architecture, language)
-
+  return esm(architecture, language);
 }
 
-const esm = (architecture:Architecture,language:Language) => {
-
-    return `
+const esm = (architecture: Architecture, language: Language) => {
+  return `
     
     import * as userRepository from ${architecture === 'mvc' ? "'../repositorys/user.repository.js'" : "'./user.repository.js'"};
 
@@ -32,12 +33,11 @@ const esm = (architecture:Architecture,language:Language) => {
 
     export const deleteUser = async (id) => {
         return await userRepository.remove(id);
-    };`
-}
+    };`;
+};
 
-const cjs = (architecture:Architecture) => {
-
-    return`
+const cjs = (architecture: Architecture) => {
+  return `
     const userRepository = require(${architecture === 'mvc' ? "'../repositorys/user.repository'" : "'./user.repository'"});
     
     const getUsers = async () => {
@@ -60,6 +60,5 @@ const cjs = (architecture:Architecture) => {
         return await userRepository.remove(id);
     };
 
-    module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser }`
-
-}
+    module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser }`;
+};

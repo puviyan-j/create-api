@@ -1,35 +1,33 @@
-import type { Module, Language, Logger } from "../../../types/answers.js";
+import type { Module, Language, Logger } from '../../../types/answers.js';
 
 const imports = (module: Module, istypescript: boolean, logger: Logger): string => {
-    if (module === "commonjs") return `const ${logger} = require('${logger}')`
-    if (istypescript) return `import ${logger} ,{ type Logger as ${logger}Logger }  from '${logger}'`;
-    return `import ${logger}  from '${logger}'`
-}
+  if (module === 'commonjs') return `const ${logger} = require('${logger}')`;
+  if (istypescript) return `import ${logger} ,{ type Logger as ${logger}Logger }  from '${logger}'`;
+  return `import ${logger}  from '${logger}'`;
+};
 
 export function generateLogger(module: Module, language: Language, logger: Logger) {
-
-    const type = `
+  const type = `
   export interface ILogger {
   info(message: string, meta?: Record<string, any>): void;
   warn(message: string, meta?: Record<string, any>): void;
   error(message: string, meta?: Record<string, any>): void;
   debug(message: string, meta?: Record<string, any>): void;
- }`
+ }`;
 
-    const istypescript = language === "typescript" ? true : false;
-    const ispino = logger === "pino" ? true : false;
+  const istypescript = language === 'typescript' ? true : false;
+  const ispino = logger === 'pino' ? true : false;
 
-
-    return `
+  return `
     ${imports(module, istypescript, logger)}
 
-    ${istypescript ? type : ""}
+    ${istypescript ? type : ''}
 
     const isDev = process.env.NODE_ENV !== 'production'
     
-    class Logger ${istypescript ? "implements ILogger" : ""} {
+    class Logger ${istypescript ? 'implements ILogger' : ''} {
 
-    ${istypescript ? `private logger: ${logger}Logger;` : ""}
+    ${istypescript ? `private logger: ${logger}Logger;` : ''}
      constructor() {
          ${ispino ? pino() : winston()}
         };
@@ -49,12 +47,11 @@ export function generateLogger(module: Module, language: Language, logger: Logge
 }
 const logger = new Logger();
 
-${module === "commonjs" ? "module.exports = {logger}" : " export {logger}"}`
-
+${module === 'commonjs' ? 'module.exports = {logger}' : ' export {logger}'}`;
 }
 
 const winston = () => {
-    return `this.logger = winston.createLogger({
+  return `this.logger = winston.createLogger({
       level: process.env.LOG_LEVEL || "info",
       format: winston.format.combine(
         winston.format.timestamp(),
@@ -66,14 +63,11 @@ const winston = () => {
           format: winston.format.simple(),
         }),
       ],
-    });`
-
-
-}
+    });`;
+};
 
 const pino = () => {
-
-    return `this.logger = pino({
+  return `this.logger = pino({
         level: process.env.LOG_LEVEL || "info",
         ...(isDev && {
             transport: {
@@ -83,9 +77,5 @@ const pino = () => {
                 },
             }
         })
-    })`
-
-}
-
-
-
+    })`;
+};

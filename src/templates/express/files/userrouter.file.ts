@@ -1,16 +1,13 @@
-import type { Architecture, Language, Module } from "../../../types/answers.js";
+import type { Architecture, Language, Module } from '../../../types/answers.js';
 
 export function generateUserroutes(module: Module, language: Language, architecture: Architecture) {
+  if (module === 'commonjs') return cjs(architecture);
 
-    if (module === "commonjs") return cjs(architecture);
+  return esm(architecture, language);
+}
 
-    return esm(architecture, language)
-
-};
-
-const esm = (architecture: Architecture,language: Language) => {
-
-    return`
+const esm = (architecture: Architecture, language: Language) => {
+  return `
     import express from "express";
     import {
         getUsers,
@@ -18,7 +15,7 @@ const esm = (architecture: Architecture,language: Language) => {
         createUser,
         updateUser,
         deleteUser,
-    } from ${architecture === "mvc"?"'../controllers/user.controller.js'":"'./user.controller.js'"};
+    } from ${architecture === 'mvc' ? "'../controllers/user.controller.js'" : "'./user.controller.js'"};
 
     const router = express.Router();
 
@@ -33,12 +30,11 @@ const esm = (architecture: Architecture,language: Language) => {
         .put(updateUser)
         .delete(deleteUser);
 
-    export default router;`
+    export default router;`;
 };
 
 const cjs = (architecture: Architecture) => {
-
-    return`
+  return `
     const express= require("express");
     const {
         getUsers,
@@ -46,7 +42,7 @@ const cjs = (architecture: Architecture) => {
         createUser,
         updateUser,
         deleteUser,
-    } = require(${architecture==="mvc"?"'../controllers/user.controller'":"'./user.controller'"});
+    } = require(${architecture === 'mvc' ? "'../controllers/user.controller'" : "'./user.controller'"});
 
     const router = express.Router();
 
@@ -61,5 +57,5 @@ const cjs = (architecture: Architecture) => {
         .put(updateUser)
         .delete(deleteUser);
 
-    module.exports = router;`
-}
+    module.exports = router;`;
+};

@@ -1,10 +1,8 @@
-import fs from "fs-extra";
-import path from "node:path";
+import fs from 'fs-extra';
+import path from 'node:path';
 
-export async function generatePrettier(
-  projectPath: string
-  ) {
-    const envContent = `{
+export async function generatePrettier(projectPath: string) {
+  const envContent = `{
       "semi": true,
       "singleQuote": true,
       "tabWidth": 2,
@@ -15,12 +13,9 @@ export async function generatePrettier(
       "bracketSpacing": true,
       "endOfLine": "lf" }`;
 
-      await fs.writeFile(
-          path.join(projectPath, ".prettierrc"),
-              envContent.trim()
-                );
+  await fs.writeFile(path.join(projectPath, '.prettierrc'), envContent.trim());
 
-    const prettierignore=`
+  const prettierignore = `
     # Dependencies
     node_modules
     
@@ -69,8 +64,7 @@ export async function generatePrettier(
     prisma/migrations
     
     # Public assets
-    public`
+    public`;
 
-  await fs.writeFile(path.join(projectPath,'.prettierignore'),prettierignore)
-            
+  await fs.writeFile(path.join(projectPath, '.prettierignore'), prettierignore);
 }

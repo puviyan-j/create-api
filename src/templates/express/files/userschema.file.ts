@@ -1,18 +1,14 @@
-import type { Language, Module, Orm } from "../../../types/answers.js";
+import type { Language, Module, Orm } from '../../../types/answers.js';
 
-export function generateUserScheam(module:Module ,orm:Orm ,language:Language) {
+export function generateUserScheam(module: Module, orm: Orm, language: Language) {
+  if (orm === 'mongoose') return mongoose(module);
 
-    if(orm === "mongoose") return mongoose(module);
-
-    return ''
-
-   
+  return '';
 }
 
-const mongoose = (module:Module) =>{
-
+const mongoose = (module: Module) => {
   return `
-    ${module === "commonjs"?"const mongoose = require('mongoose')":"import mongoose from 'mongoose'"};
+    ${module === 'commonjs' ? "const mongoose = require('mongoose')" : "import mongoose from 'mongoose'"};
 
     const userSchema = new mongoose.Schema(
         {
@@ -54,5 +50,5 @@ const mongoose = (module:Module) =>{
 
     const UserModel = mongoose.model('User', userSchema);
 
-    ${module === "commonjs"?"module.exports = {UserModel};":" export {UserModel}"}`
-}
+    ${module === 'commonjs' ? 'module.exports = {UserModel};' : ' export {UserModel}'}`;
+};
